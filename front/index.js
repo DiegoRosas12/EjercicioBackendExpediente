@@ -1,25 +1,32 @@
 window.addEventListener('load', function() {
-  function sendData() {
-    const XHR = new XMLHttpRequest();
-
-    // Bind the FormData object and the form element
-    const FD = new FormData(form);
-
-    // Define what happens on successful data submission
-    XHR.addEventListener('load', function(event) {
-      alert(event.target.responseText);
-    });
-
-    // Define what happens in case of error
-    XHR.addEventListener('error', function(event) {
-      alert('No pudo enviarse el expediente');
-    });
-
-    // Set up our request
-    XHR.open('POST', 'https://localhost:5000/api');
-
-    // The data sent is what the user provided in the form
-    XHR.send(FD);
+  async function sendData() {
+    try {
+      let nombre = document.getElementById('nombre').value;
+      if (!nombre) return alert('El nombre es requerido');
+      let data = {
+        nombre: nombre,
+        sangre: document.getElementById('sangre').value,
+        alergias: []
+      };
+      console.log(data);
+      let response = await fetch('http://localhost:5000/api/', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json'
+        }
+      });
+      if (response.ok) {
+        let json = await response.json();
+        alert('Se envió el expediente y se generó la clave' + json.uuid);
+      } else {
+        alert('HTTP-Error: ' + response.status);
+      }
+    } catch (error) {
+      console.error(error.message);
+      alert('No pudieron mandar los datos');
+    }
   }
 
   async function listarUUIDS() {

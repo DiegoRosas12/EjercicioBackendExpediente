@@ -6,7 +6,7 @@ import path from 'path';
 import url from 'url';
 import querystring from 'querystring';
 
-import db from './config/database';
+import db from '../config/database';
 
 import routes from './routes';
 

@@ -19,7 +19,7 @@ services:
       context: .
     restart: unless-stopped
     ports:
-      - '5050:5000'
+      - '5051:5000'
     volumes:
       - .:/app/node_app
       - ./package.json:/app/package.json
@@ -35,11 +35,6 @@ services:
       - DB_NAME=expediente_api
       - DB_PASSWORD=contra123
       - DB_PORT=5434
-      - SEED=XjQkBWHaPNLyLeUAUjGJiDNttsuLS73pcuy
-      - CADUCIDAD_TOKEN=1d
-      - HOSTBACK=https://api.wep.mx
-      - HOSTFRONT=https://app.wep.mx
-      - ENV=prod
 volumes:
   pgdata-expediente_api:
   notused:

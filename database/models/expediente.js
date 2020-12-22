@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   class Expediente extends Model {
     static associate(models) {
       models.Expediente.belongsToMany(models.alergia, {
+        attributes: ['nombre', 'medicamento'],
         through: 'expedienteAlergia',
         as: 'alergias',
         foreignKey: 'uuid',

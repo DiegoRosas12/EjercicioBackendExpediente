@@ -1,5 +1,4 @@
 import models from '../../database/models';
-import Sequelize, { where } from 'sequelize';
 
 export async function agregarExpediente(req, res) {
   try {
@@ -60,6 +59,7 @@ export async function agregarExpediente(req, res) {
 export async function obtenerCadaExpediente(req, res) {
   try {
     const expedientes = await models.Expediente.findAll({
+      attributes: { exclude: ['updatedAt'] },
       include: ['alergias']
     });
     res.status(200).send(expedientes);

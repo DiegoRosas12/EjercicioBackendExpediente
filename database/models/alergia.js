@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       models.alergia.belongsToMany(models.Expediente, {
         through: 'expedienteAlergia',
+        attributes: ['nombre', 'medicamento'],
         as: 'alergias',
         foreignKey: 'id',
         otherKey: 'uuid'

@@ -10,13 +10,11 @@ import db from '../config/database';
 
 import routes from './routes';
 
-
 db.authenticate()
   .then(() => console.log('Database connected...'))
   .catch(err => console.log('Error DB => ', err));
 
 const server = express();
-
 
 server.use(cors());
 server.use(morgan('dev'));

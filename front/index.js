@@ -28,7 +28,8 @@ window.addEventListener('load', function() {
 
       let response = await fetch('http://localhost:5000/api/' + uuid, {
         headers: {
-          'Access-Control-Allow-Origin': '*'
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json'
         }
       });
       let expedientes = document.getElementById('expedientes');
@@ -61,7 +62,8 @@ window.addEventListener('load', function() {
       }
       let response = await fetch('http://localhost:5000/api/' + uuid, {
         headers: {
-          'Access-Control-Allow-Origin': '*'
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Origin': 'http://localhost:5000'
         }
       });
       let expedientes = document.getElementById('expedientes');
@@ -70,20 +72,20 @@ window.addEventListener('load', function() {
         // get the response body (the method explained below)
         let json = await response.json();
         let lista = '';
-        // json.forEach(el => {
-        //   console.log(el);
+        // // json.forEach(el => {
+        // //   console.log(el);
         lista += '<label>Clave expediente</label>';
-        lista += '<p>' + response.uuid + '</p>';
+        lista += '<p>' + json.uuid + '</p>';
         lista += '<label>Nombre</label>';
-        lista += '<p>' + response.nombre + '</p>';
+        lista += '<p>' + json.nombre + '</p>';
         lista += '<label>Tipo de sangre</label>';
-        lista += '<p>' + response.sangre + '</p>';
+        lista += '<p>' + json.sangre + '</p>';
         lista += '<label>Última Consulta</label>';
-        lista += '<p>' + response.ultimaConsulta + '</p>';
+        lista += '<p>' + json.ultimaConsulta + '</p>';
         lista += '<label>Fecha de creación</label>';
-        lista += '<p>' + response.createdAt + '</p>';
-        // });
-        console.log(response);
+        lista += '<p>' + json.createdAt + '</p>';
+        // // });
+        // console.log(response);
         expedientes.innerHTML = lista;
         //   console.log(json);
       } else {

@@ -1,0 +1,45 @@
+version: '3.3'
+services:
+  postgres:
+    image: 'postgres:12.2'
+    ports:
+      - 5434:5432
+    environment:
+      - POSTGRES_USER=my_user
+      - POSTGRES_DB=expediente_api
+      - POSTGRES_PASSWORD=contra123
+    volumes:
+      - 'pgdata-expediente_api:/var/lib/postgresql/data'
+
+  api:
+    depends_on:
+      - postgres
+    build:
+      dockerfile: Dockerfile.dev
+      context: .
+    restart: unless-stopped
+    ports:
+      - '5050:5000'
+    volumes:
+      - .:/app/node_app
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+      - notused:/app/node_modules
+    environment:
+      - TZ=America/Mexico_City
+      - LC_CTYPE=en_US.UTF-8
+      - LC_ALL=en_US.UTF-8
+      - DB_USER=my_user
+      - PORT=5000
+      - DB_HOST=postgres
+      - DB_NAME=expediente_api
+      - DB_PASSWORD=contra123
+      - DB_PORT=5434
+      - SEED=XjQkBWHaPNLyLeUAUjGJiDNttsuLS73pcuy
+      - CADUCIDAD_TOKEN=1d
+      - HOSTBACK=https://api.wep.mx
+      - HOSTFRONT=https://app.wep.mx
+      - ENV=prod
+volumes:
+  pgdata-expediente_api:
+  notused:

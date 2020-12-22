@@ -62,6 +62,9 @@ NODE_ENV=development
 Para correr el programa se escribe el siguiente comando:
 `npm run dev`
 
+Para crear las tablas en la base de datos:
+`npx sequelize-cli db:migrate`
+
 # Endpoints
 
 Se pueden probar los endpoints en programas como Postman o Imsomnia
@@ -177,3 +180,12 @@ En el cuerpo de tipo JSON debe de contener una estructura similar a la siguiente
     ]
 }
 ```
+
+## Probar con interfaz
+Abrir el documento con el navegador llamado `index.html` dentro de la carpeta front.  
+Tiene las funciones de:
+- Mostrar las claves de los expedientes creados (útil para poder buscar)
+- Buscar por clave
+- Agregar nuevo expediente
+
+Por el momento no está disponible crear alergias ya que son tratadas como objetos individuales y por cuestiones de tiempo no se pudo implementar en la interfaz pero si en el backend

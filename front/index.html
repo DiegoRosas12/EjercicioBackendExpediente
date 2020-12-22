@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Nuevo expediente</h3>
+    <form id="myForm">
+    <label for="nombre">Nombre:</label><br>
+    <input type="text" id="nombre" name="nombre"><br>
+    <label for="sangre">Tipo de sangre</label><br>
+    <select name="sangre">
+        <option value="A+">A+</option>
+        <option value="A-">A-</option>
+        <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
+        <option value="B+">B+</option>
+        <option value="B-">B-</option>
+        <option value="O+">O+</option>
+        <option value="O-">O-</option>
+        <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
+    </select>
+    <input type="submit" value="Submit">
+    </form>
+    <h3>Buscar expediente</h3>
+    <form id="buscar">
+        <input type="text" name="uuid" id="uuid">
+        <input type="submit" value="Submit">
+    </form>
+    <h3>Mostrar las claves de expediente existentes</h3>
+    <button id="show" name="show">Mostrar</button>
+    <div id="expedientes">
+
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

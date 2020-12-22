@@ -1,6 +1,9 @@
 # EjercicioBackendExpediente
 
 # Instrucciones de instalación
+## Requisitos
+- Postgres
+- NodeJS
 
 ## 1. Instalar Postgres
 
@@ -52,6 +55,8 @@ REFRESH_TOKEN_SECRET=myrefreshtokensecret
 NODE_ENV=development
 ```
 
+# Instalación de modulos de Node
+`npm install`
 # Ejecución
 
 Para correr el programa se escribe el siguiente comando:

@@ -1,5 +1,6 @@
 import models from '../../database/models';
 
+// Esta función utiliza un patrón de diseño creacional
 export async function agregarExpediente(req, res) {
   try {
     const { body } = req;
@@ -56,6 +57,7 @@ export async function agregarExpediente(req, res) {
   }
 }
 
+// Patrón de diseño de comportamiento iterador
 export async function obtenerCadaExpediente(req, res) {
   try {
     const expedientes = await models.Expediente.findAll({

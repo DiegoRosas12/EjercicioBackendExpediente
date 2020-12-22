@@ -6,7 +6,7 @@ GRANT INSERT, UPDATE, DELETE, SELECT ON ALL TABLES IN SCHEMA public TO expedient
 /*
 La ventaja de utilizar un ORM como Sequelize es poder evitar escribir las consultas en sql manualmente.
 Sin embargo aquí se deja el código SQL de su implementación.
-NO se recomienda el uso del siguiente script si ya se ejecutó el programa
+NO es necesario el uso del siguiente script si ya se ejecutó el programa
 */
 -- Se utiliza un plugin para hacer el llenado con uuid
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";

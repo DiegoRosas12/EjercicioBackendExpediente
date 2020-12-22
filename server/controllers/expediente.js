@@ -31,7 +31,25 @@ export async function agregarExpediente(req, res) {
       ultimaConsulta: Date.now(),
       sangre: body.sangre.toUpperCase()
     };
+
     const expediente = await models.Expediente.create(nuevoExpediente);
+    // Todavia no se implementa un sistema de gestión de alergias por lo cual
+    // siempre creará nuevos registros
+    await body.alergias.forEach(async alergia => {
+      if (alergia.nombre && alergia.medicamento) {
+        let nuevaAlergia = await models.alergia.create({
+          nombre: alergia.nombre,
+          medicamento: alergia.medicamento
+        });
+        await models.expedienteAlergia.create({
+          uuid: expediente.uuid,
+          alergiaId: nuevaAlergia.id
+        });
+      } else {
+        return res.status(400).send('Datos de la alergia faltantes');
+      }
+    });
+
     res.status(200).send(expediente);
   } catch (err) {
     console.log(err);
@@ -41,7 +59,9 @@ export async function agregarExpediente(req, res) {
 
 export async function obtenerCadaExpediente(req, res) {
   try {
-    const expedientes = await models.Expediente.findAll();
+    const expedientes = await models.Expediente.findAll({
+      include: ['alergias']
+    });
     res.status(200).send(expedientes);
   } catch (err) {
     console.log(err);
@@ -55,10 +75,12 @@ export async function obtenerUnExpediente(req, res) {
 
     if (!params.uuid) return res.status(400).send('uuid requerido');
 
-    const expediente = await models.Expediente.findOne({
+    let expediente = await models.Expediente.findAll({
+      include: ['alergias'],
       where: {
         uuid: params.uuid
-      }
+      },
+      plain: true
     });
 
     if (expediente) {
@@ -72,6 +94,12 @@ export async function obtenerUnExpediente(req, res) {
           }
         }
       );
+    } else {
+      const response = {
+        codigo: 400,
+        mensaje: 'El id de usuario no existe'
+      };
+      return res.status(404).send(response);
     }
 
     res.status(200).send(expediente);
